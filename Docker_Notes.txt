@@ -1,0 +1,114 @@
+Docker
+------
+    Dockerfile ==>  Dockerimage ==>  DockerContainer
+
+1)Create a dockerfile
+
+2)Add instructions in Dockerfile to create docker image
+
+3)Run Dockerfile to create Docker image
+
+4)Run Docker image to create Docker Container
+
+5)Access the application running in docker container
+
+==>A docker is a platform for building running and shipping applications
+ 
+Reasons
+-------
+   * missing files
+   * version mismatch
+
+For Example: (only springboot)
+-----------
+   1)create the spring boot project and create the docker file.
+
+   2)create the java crud operation.
+
+   3)using the jar file we can create the docker file (inside target folder. file name is Dockerfile(extention no need))
+         
+          FROM openjdk:17-jdk-alpine
+	  WORKDIR /app
+	  COPY *.jar opentelemetry.jar
+	  COPY KYC-0.0.1-SNAPSHOT.jar kyc-application.jar 
+ 	  CMD ["java", "-jar", "kyc-application.jar"]
+
+
+		
+
+   4) After creating the docker file we need to open the command prompt from the created project file location
+
+   5)C:\Users\udhaya.m\Six-group\six-group\demo1-WebClient\target>docker build --no-cache -t myclientweb -f Dockerfile .
+
+   6)To view the created docker images ==> C:\Users\udhaya.m\Six-group\six-group\demo1-WebClient\target>docker image ls
+
+   7)After created the docker images we have to run using the command ==> docker run -p 8080:8080 -d myclientweb
+
+   8)After run the command we go to the docker desktop and already runned the containers it will come in the docker desktop.it will be run itself in docker desktop.
+
+
+Example:(springboot with postgres)
+--------
+
+	1. create springboot project and do operation.
+
+	2. inside target folder create Dockerfile and docker-compose.yml file
+
+	3. inside Dockerfile
+
+		FROM openjdk:17-jdk-alpine
+		WORKDIR /app
+		COPY *.jar opentelemetry.jar
+		COPY KYC-0.0.1-SNAPSHOT.jar kyc-application.jar 
+		CMD ["java", "-jar", "kyc-application.jar"]
+
+	4. inside docker-compose.yml
+
+		version: '3'
+		services:
+  		  postgres:
+    		     image: postgres
+    		     container_name: postgres
+    		     ports:
+      		       - "5432:5432"
+    		     environment:
+      		       POSTGRES_USER: postgres
+      		       POSTGRES_PASSWORD: Database@123
+      		       POSTGRES_DB: postgres
+		  springbootapp:
+    		     build: .
+    		     container_name: springbootapp
+    		     ports:
+      			- "8080:8080"
+    		     depends_on:
+      			- postgres
+    		     environment:
+      			SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+      			SPRING_DATASOURCE_USERNAME: postgres
+      			SPRING_DATASOURCE_PASSWORD: Database@123
+
+	5. go to command prompt and change directory to your project location after that cd to target location then,
+		
+		create new images:
+
+		   docker-compose up --build
+
+		If image already created you just run use, 
+ 
+		   docker-compose -f docker-compose.yml up -d 
+
+
+How to move Local to Hub
+-------------------------
+
+	1. docker tag local_image:tag username/repository:tag
+	     eg:
+	     ---
+		docker tag target-springbootapp:latest ulaganathan0724/target-springbootapp:latest
+
+	2. docker push username/repository:tag
+	     eg:
+	     ---
+		docker push ulaganathan0724/target-springbootapp:latest
+
+	docker pull image_name ( To move hub to local )
