@@ -92,7 +92,7 @@ LIQUIBASE LOCAL SETUP:
                liquibase status
 
            # Apply changes to the database
-               liquibase update
+               liquibase update --changelog-file=dbchangelog.xml
 
            # Rollback changes
                liquibase rollbackCount 1
