@@ -1,0 +1,37 @@
+	## To complete all steps, we need Docker. ##
+
+1. Clone the LangFlow repository:
+
+	git clone https://github.com/langflow-ai/langflow.git
+
+2. After cloning langflow go to: 
+   
+	C:\Users\ulaganathan.s\langflow\docker_example
+
+3. modify docker-compose.yml file
+
+        version: "3.8"
+	services:
+  	  langflow:
+    	    image: langflowai/langflow:latest
+    	  ports:
+            - "7860:7860"
+    	  environment:
+            - OLLAMA_HOST=host.docker.internal
+            - OLLAMA_PORT=11434
+    	  volumes:
+            - langflow-data:/app/langflow
+	volumes:
+  	  langflow-data:
+ 
+4. Open cmd and navigate to the docker_example directory:
+
+	cd langflow/docker_example
+
+5. Run the Docker Compose file:
+
+	docker compose up
+
+6. LangFlow will now be accessible at:
+
+	 http://localhost:7860/.

@@ -1,0 +1,62 @@
+1. Create new Angular Project
+
+	npm install -g create-react-app my-app
+
+2. Add Script coverage
+
+	script{
+    	...
+    	"coverage": "react-scripts test --coverage",
+	}
+
+3. Install sonarqube-scanner package
+
+	Run npm install --save-dev sonarqube-scanner@2.8.2 (2.8.2)
+	Run npm install --save-dev jest-sonar-reporter
+
+4. SonarQube Configuration File
+
+  * On the root of the project, create a ‘sonarqube-scanner.js’ file *
+
+	const scanner = require('sonarqube-scanner');
+	scanner(
+    		{
+        	serverUrl: "http://localhost:9000",
+        	options: {
+            		"sonar.login": "admin",
+            		"sonar.password": "sonar",
+            		"sonar.projectName": "react_app",
+            		"sonar.projectDescription": "Just for demo...",
+            		"sonar.sourceEncoding":"UTF-8",
+            		"sonar.sources": "./src",
+            		"sonar.test.inclusions": "**/*.test.tsx,**/*.test.ts",
+            		"sonar.exclusions": "**/*.test.tsx",
+            		"sonar.tests":"./src",
+            		"sonar.testExecutionReportPaths":"test-report.xml",
+            		"sonar.javascript.lcov.reportPaths":"coverage/lcov.info"
+        		},
+    		},
+    		() => process.exit()
+	);
+
+5. Run coverage script
+
+	npm run coverage
+
+6. Add sonar script
+
+	script{
+    	...
+    	"test-sonar": "react-scripts test --watchAll=false --coverage --testResultsProcessor jest-sonar-reporter",
+    	"sonar": "node sonarqube-scanner.js"
+	}
+
+7. run sonar script
+
+	npm run test-sonar
+	npm run sonar
+
+
+
+
+
