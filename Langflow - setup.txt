@@ -35,3 +35,40 @@
 6. LangFlow will now be accessible at:
 
 	 http://localhost:7860/.
+	 
+	 
+	 
+	 
+	 
+	## Through Local ##
+	
+1. Create one Folder
+
+	Ex:
+	   LangFlow
+	   
+2. Open Command Prompt in LangFlow directory
+
+	1.Create a Virtual Environment
+	
+		python -m venv langflow-env
+	
+    2.Activate the virtual environment:
+	
+		langflow-env\Scripts\activate
+	   
+	3.Install langflow 
+	   
+		pip install langflow==1.0.10
+
+	4.List Installed Packages:
+	
+		pip list
+
+	5. Try to change versions for below dependencies:
+	
+		crewai - 0.35.0
+		crewai-tools - 5.4.0
+		langchain -  0.1.20
+		langchain-community -  0.0.38
+

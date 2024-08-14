@@ -1,0 +1,60 @@
+
+Local setup:
+-----------
+
+## Pre-requisite: ensure NodeJS is installed on machine. Node v18.15.0 or v20 and above is supported. ##
+
+  1. Install Flowise:
+	
+	npm install -g flowise
+
+  2. Start Flowise:
+
+	npx flowise start
+
+  3. Open: http://localhost:3000
+
+
+Deploying with Docker:
+======================
+
+step-1: Create a folder with flowise( name your wish)
+
+step-2: then go to inside of that folder
+	
+	C:\Flowise> 
+
+step-3: Then create one .yml file for docker compose up
+
+     for example :  docker-compose.yml
+
+step-4 : For downloading docker image for flowise we have to configure docker-compose.yml file below like that
+	
+
+
+version: "3.8"
+
+services:
+  flowise-ai:
+    image: flowiseai/flowise:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - OLLAMA_HOST=host.docker.internal
+      - OLLAMA_PORT=11434
+    volumes:
+      - flowise-data:/app/data
+
+volumes:
+  flowise-data:
+
+
+step-5: Then open the cmd and go to the specific directory of docker-compose.yml file Then run below command
+
+C:\Flowise>docker compose up
+
+step-6: After successfully ran then you can hit the url in browser below like that
+
+ http://localhost:3000/
+
+
