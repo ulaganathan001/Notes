@@ -1,4 +1,4 @@
-LIQUIBASE:
+What is LIQUIBASE:
 ----------
    1) Liquibase is an open-source database-independent tool for database schema management. 
 
